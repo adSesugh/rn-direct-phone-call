@@ -21,7 +21,7 @@ export default function App() {
        <Button title='Call Me' onPress={startCall} />
       </View>
       <ScrollView style={{ height: height/2 }}>
-        <Text>{JSON.stringify(getSimInfo().deviceId0)}</Text>
+        <Text>{JSON.stringify(getSimInfo())}</Text>
       </ScrollView>
     </View>
   );
