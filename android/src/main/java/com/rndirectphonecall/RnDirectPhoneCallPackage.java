@@ -3,6 +3,7 @@ package com.rndirectphonecall;
 import androidx.annotation.NonNull;
 
 import com.facebook.react.ReactPackage;
+import com.facebook.react.bridge.JavaScriptModule;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
@@ -20,9 +21,17 @@ public class RnDirectPhoneCallPackage implements ReactPackage {
         return modules;
     }
 
+    public List<Class<? extends JavaScriptModule>> createJSModules() {
+      return Collections.emptyList();
+    }
+
     @NonNull
     @Override
     public List<ViewManager> createViewManagers(@NonNull ReactApplicationContext reactContext) {
         return Collections.emptyList();
+    }
+
+    public static void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+      RnDirectPhoneCallModule.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }

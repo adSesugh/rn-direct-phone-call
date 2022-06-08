@@ -16,4 +16,10 @@ RCT_REMAP_METHOD(multiply,
   resolve(result);
 }
 
+RCT_EXPORT_METHOD(immediatePhoneCall:(NSString *)number)
+{
+    NSLog(@"%@", number);
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel:%@", number]]];
+};
+
 @end

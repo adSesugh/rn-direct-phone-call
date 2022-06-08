@@ -1,18 +1,28 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'rn-direct-phone-call';
+import { StyleSheet, View, Button, ScrollView, Text, Dimensions } from 'react-native';
+import { andCall, getSimInfo } from 'rn-direct-phone-call';
+
+const {height} = Dimensions.get('window');
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
 
   React.useEffect(() => {
-    multiply(3, 7).then(setResult);
-  }, []);
+    console.log(getSimInfo());
+  }, [])
+
+  const startCall = () => {
+    return andCall('123', 1);
+  }
 
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+       <Button title='Call Me' onPress={startCall} />
+      </View>
+      <ScrollView style={{ height: height/2 }}>
+        <Text>{JSON.stringify(getSimInfo().deviceId0)}</Text>
+      </ScrollView>
     </View>
   );
 }
@@ -20,8 +30,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginTop: 120,
   },
   box: {
     width: 60,

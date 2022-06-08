@@ -7,7 +7,7 @@ buildscript {
         }
 
         dependencies {
-            classpath 'com.android.tools.build:gradle:3.5.3'
+            classpath 'com.android.tools.build:gradle:7.0.4'
         }
     }
 }
@@ -19,12 +19,10 @@ def safeExtGet(prop, fallback) {
 }
 
 android {
-    compileSdkVersion safeExtGet('RnDirectPhoneCall_compileSdkVersion', 29)
+    compileSdkVersion safeExtGet('RnDirectPhoneCall_compileSdkVersion', 32)
     defaultConfig {
-        minSdkVersion safeExtGet('RnDirectPhoneCall_minSdkVersion', 16)
-        targetSdkVersion safeExtGet('RnDirectPhoneCall_targetSdkVersion', 29)
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion safeExtGet('RnDirectPhoneCall_minSdkVersion', 23)
+        targetSdkVersion safeExtGet('RnDirectPhoneCall_targetSdkVersion', 32)
 
     }
 

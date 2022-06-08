@@ -17,6 +17,14 @@ const RnDirectPhoneCall = NativeModules.RnDirectPhoneCall
       }
     );
 
-export function multiply(a: number, b: number): Promise<number> {
-  return RnDirectPhoneCall.multiply(a, b);
+export function andCall(sCode: string, simIndex: number) {
+  return RnDirectPhoneCall.andCall(sCode, simIndex);
+}
+
+export function iosCall(sCode: string) {
+  return RnDirectPhoneCall.iosCall(sCode);
+}
+
+export function getSimInfo() {
+  return RnDirectPhoneCall.getConstants();
 }
