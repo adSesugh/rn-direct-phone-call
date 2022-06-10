@@ -65,6 +65,9 @@ android/app/debug.keystore
 lib/
 
 example/android/app/debug.keystore
+example/android/.gradle
+example/android/gradle
+
 .npmrc
 android/build
 android/.idea
