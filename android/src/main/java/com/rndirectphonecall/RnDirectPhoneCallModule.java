@@ -114,11 +114,13 @@ public class RnDirectPhoneCallModule extends ReactContextBaseJavaModule {
           String iccId             = subInfo.getIccId();
           int simSlotIndex         = subInfo.getSimSlotIndex();
           String deviceId          = telManager.getDeviceId();
+          //String phoneNumber       = telManager.getLine1Number();
 
           constants.put("carrierName" + sub, carrierName.toString());
           constants.put("simSlotIndex"     + sub, simSlotIndex);
           constants.put("deviceId"         + sub, deviceId);
           constants.put("simSerialNumber"  + sub, iccId);
+          //constants.put("phoneNumber" + sub, phoneNumber);
           sub++;
         }
       } catch (Exception e) {

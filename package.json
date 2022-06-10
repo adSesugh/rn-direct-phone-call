@@ -34,7 +34,10 @@
   "keywords": [
     "react-native",
     "ios",
-    "android"
+    "android",
+    "react-component",
+    "direct phone call",
+    "phone number"
   ],
   "repository": "https://github.com/keensoen/rn-direct-phone-call",
   "author": "Sesugh Agbadu <sesughagbadu@yahoo.com> (https://github.com/keensoen)",

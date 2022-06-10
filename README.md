@@ -1,4 +1,4 @@
-# React Native Direct Phone Call
+## React Native Direct Phone Call
 
 React Native Direct Phone Call module is targeted at making a direct call from your iOS and Android application. This module is shipped with the following features:
 
@@ -9,6 +9,7 @@ React Native Direct Phone Call module is targeted at making a direct call from y
 
 ```sh
 npm install rn-direct-phone-call --save
+
 Or
 
 yarn add rn-direct-phone-call

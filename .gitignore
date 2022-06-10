@@ -65,3 +65,12 @@ android/app/debug.keystore
 lib/
 
 example/android/app/debug.keystore
+.npmrc
+android/build
+android/.idea
+android/app/debug
+android/app/debug.keystore
+android/gradle
+android/local.properties
+android/gradlew
+android/gradlew.bat

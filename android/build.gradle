@@ -19,10 +19,10 @@ def safeExtGet(prop, fallback) {
 }
 
 android {
-    compileSdkVersion safeExtGet('RnDirectPhoneCall_compileSdkVersion', 32)
+    compileSdkVersion safeExtGet('RnDirectPhoneCall_compileSdkVersion', 29)
     defaultConfig {
         minSdkVersion safeExtGet('RnDirectPhoneCall_minSdkVersion', 23)
-        targetSdkVersion safeExtGet('RnDirectPhoneCall_targetSdkVersion', 32)
+        targetSdkVersion safeExtGet('RnDirectPhoneCall_targetSdkVersion', 29)
 
     }
 
