@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.telecom.PhoneAccountHandle;
+import android.telecom.TelecomManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -37,6 +39,7 @@ public class RnDirectPhoneCallModule extends ReactContextBaseJavaModule {
   private static Integer simIndex;
   private static final int CALL_PHONE_CODE = 100;
   private static final int READ_PHONE_STATE_CODE = 101;
+  private static TelecomManager telecomManager;
 
   public RnDirectPhoneCallModule(ReactApplicationContext reactContext) {
     super(reactContext);
@@ -44,6 +47,7 @@ public class RnDirectPhoneCallModule extends ReactContextBaseJavaModule {
       rnDirectPhoneCallModule = this;
     }
     this.reactContext = reactContext;
+    telecomManager = (TelecomManager) getCurrentActivity().getSystemService(Context.TELECOM_SERVICE);
   }
 
   @Override
@@ -53,19 +57,13 @@ public class RnDirectPhoneCallModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void multiply(int a, int b, Promise promise) {
-    promise.resolve(a * b);
-  }
-
-  //public static native int nativeMultiply(int a, int b);
-
-  @ReactMethod
   public void andCall(String number, Integer simNumber) {
     RnDirectPhoneCallModule.number = Uri.encode(number);
     RnDirectPhoneCallModule.simIndex = simNumber;
 
-    if (ContextCompat.checkSelfPermission(getReactApplicationContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-      ActivityCompat.requestPermissions(getCurrentActivity(), new String[]{Manifest.permission.CALL_PHONE}, CALL_PHONE_CODE);
+    if (ContextCompat.checkSelfPermission(getReactApplicationContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED
+      && ActivityCompat.checkSelfPermission(getCurrentActivity(), Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+      ActivityCompat.requestPermissions(getCurrentActivity(), new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.READ_PHONE_STATE}, CALL_PHONE_CODE);
     } else {
       startCall();
     }
@@ -87,6 +85,17 @@ public class RnDirectPhoneCallModule extends ReactContextBaseJavaModule {
 
       for (String s : simSlotName) {
         intent.putExtra(s, simCard);
+      }
+
+      List<PhoneAccountHandle> phoneAccountHandleList = telecomManager.getCallCapablePhoneAccounts();
+      if (simIndex == 0) {
+          if (phoneAccountHandleList != null && phoneAccountHandleList.size() > 0)
+              intent.putExtra("android.telecom.extra.PHONE_ACCOUNT_HANDLE", phoneAccountHandleList.get(0));
+      } else {
+
+          if (phoneAccountHandleList != null && phoneAccountHandleList.size() > 1)
+              intent.putExtra("android.telecom.extra.PHONE_ACCOUNT_HANDLE", phoneAccountHandleList.get(1));
+
       }
 
       rnDirectPhoneCallModule.reactContext.startActivity(intent);
@@ -114,13 +123,11 @@ public class RnDirectPhoneCallModule extends ReactContextBaseJavaModule {
           String iccId             = subInfo.getIccId();
           int simSlotIndex         = subInfo.getSimSlotIndex();
           String deviceId          = telManager.getDeviceId();
-          //String phoneNumber       = telManager.getLine1Number();
 
           constants.put("carrierName" + sub, carrierName.toString());
           constants.put("simSlotIndex"     + sub, simSlotIndex);
           constants.put("deviceId"         + sub, deviceId);
           constants.put("simSerialNumber"  + sub, iccId);
-          //constants.put("phoneNumber" + sub, phoneNumber);
           sub++;
         }
       } catch (Exception e) {
@@ -133,9 +140,10 @@ public class RnDirectPhoneCallModule extends ReactContextBaseJavaModule {
     public static void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if(requestCode == CALL_PHONE_CODE){
             if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                startCall();
+              startCall();
             }
         }
-        if(requestCode == READ_PHONE_STATE_CODE){}
+        if(requestCode == READ_PHONE_STATE_CODE)
+          return;
     }
 }
