@@ -8,10 +8,11 @@ const {height} = Dimensions.get('window');
 export default function App() {
 
   React.useEffect(() => {
-    console.log(getSimInfo());
+    //console.log(getSimInfo());
   }, [])
 
   const startCall = () => {
+    console.log(getSimInfo());
     return andCall('123', 1);
   }
 

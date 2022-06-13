@@ -2,5 +2,8 @@
   xmlns:tools="http://schemas.android.com/tools"
   package="com.rndirectphonecall">
   <uses-permission android:name="android.permission.CALL_PHONE" />
+  <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" />
+  <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
+    tools:ignore="ProtectedPermissions" />
   <uses-permission android:name="android.permission.READ_PHONE_STATE" android:maxSdkVersion="29" />
 </manifest>

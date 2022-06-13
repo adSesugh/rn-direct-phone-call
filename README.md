@@ -55,13 +55,12 @@ console.log(getSimInfo());
 
   carrierName0: string;
   simSlotIndex0: string;
-  deviceId0: string;
-  simSerialNumber0: string;
+  displayName0: string;
 */
 
 // Access the getSimInfo() variables as follows
 
-getSimInfo().deviceId0
+getSimInfo().carrierName0
 ```
 
 ### Caveats
