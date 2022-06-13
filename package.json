@@ -1,6 +1,6 @@
 {
   "name": "rn-direct-phone-call",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "React native dailer module targeted at direct call for iOS and Android with the capability to work with daul sim card on Android platform.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
